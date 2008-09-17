@@ -202,3 +202,8 @@ function verify() {
 };
 
 print(verify());
+
+// Use `M-x recompile' to verify tests from Emacs (assumes
+// spidermonkey is available somewhere as `js'')
+
+// -*- compile-command: "cat seethrough.js examples.js | js"
