@@ -128,7 +128,7 @@ var examples = [
     }
 ];
 
-function verify = function() {
+function verify() {
     function compareXML(t1, t2) {
         function compareXML1(tree1, tree2) {
             if(tree1.nodeKind() != tree2.nodeKind())
@@ -178,7 +178,7 @@ function verify = function() {
         return true;
     }
 
-    var results = seethrough.examples.map(function(example) {
+    var results = examples.map(function(example) {
         try {
             d.on = example.debug;
             var rendered = seethrough
