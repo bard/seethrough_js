@@ -313,7 +313,7 @@ function d(msg) {
         print(msg);
 
     // debugging in helma
-    if(typeof(app.log) == 'function')
+    if(typeof(app) == 'object' && (app.log) == 'function')
         app.log(msg);
 }
 d.on = false;
