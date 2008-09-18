@@ -38,10 +38,14 @@ var seethrough = {};
 
 seethrough.processors = {
     'http://hyperstruct.net/seethrough#helma::attr': function() {
+        // Apparently, an xml attribute object cannot be created by
+        // itself, so we use a dummy element as attribute "factory".
+        // Also, we want to create this element just once, not every
+        // time we need to generate an attribute.
         var dummy = <dummy/>;
         return function stAttr(element, env, children) {
             dummy.@[element.@name] = children(env).toString();
-            return dummy.@[element.@name]
+            return dummy.@[element.@name];
         }
     },
 
