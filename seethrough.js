@@ -309,7 +309,7 @@ function d(msg) {
         return;
 
     // debugging in command-line spidermonkey
-    if(typeof('print') == 'function')
+    if(typeof(print) == 'function')
         print(msg);
 
     // debugging in helma
