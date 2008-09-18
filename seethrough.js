@@ -308,12 +308,20 @@ function d(msg) {
     if(!d.on)
         return;
 
-    // debugging in command-line spidermonkey
-    if(typeof(print) == 'function')
-        print(msg);
+    if(!arguments.callee.printFn) {
+        if(typeof(print) == 'function')
+            // command-line spidermonkey
+            arguments.callee.printFn = print;
+        else if(typeof(app) == 'object' &&
+                typeof(app.log) == 'function')
+            // helma
+            arguments.callee.printFn = function(s) { app.log(s) };
+        else
+            arguments.callee.printFn = function() {};
+    }
 
-    // debugging in helma
-    if(typeof(app) == 'object' && (app.log) == 'function')
-        app.log(msg);
+    var callerLine = (new Error()).stack.split('\n')[2];
+
+    arguments.callee.printFn(callerLine + ':' + msg);
 }
 d.on = false;
