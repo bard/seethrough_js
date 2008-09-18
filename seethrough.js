@@ -125,10 +125,28 @@ seethrough.processors = {
             if(iterName in env)
                 throw new Error('Overriding global name not yet supported.');
 
+            // XXX copied from compile.element -- factor! cleanup!
+
             var collection = seethrough.getEnv(env, collectionName);
             for each(var envValue in collection) {
                 env[iterName] = envValue;
-                container += element.copy().appendChild(children(env));
+
+                var xmlOut = element.copy();
+
+                var xmlChildren = children(env);
+                if(typeof(xmlChildren) == 'undefined')
+                    return xmlOut;
+
+                var xmlChild;
+                for(var i=0,l=xmlChildren.length(); i<l; i++) {
+                    xmlChild = xmlChildren[i];
+                    if(xmlChild.nodeKind() == 'attribute')
+                        xmlOut.@[xmlChild.name()] = xmlChild.toString();
+                    else
+                        xmlOut.appendChild(xmlChild);
+                }
+
+                container += xmlOut;
             }
             delete env[iterName];
             return container;

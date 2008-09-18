@@ -141,6 +141,35 @@ var examples = [
             <div xmlns:st={ns_st}>
             <div foo="bar"/>
             </div>
+    },
+
+    {
+        name: 'attribute on looping item',
+
+        template:
+            <div xmlns:st={ns_st}>
+            <ol>
+            <li st:loop="item items">
+            <st:attr name="_id"><span st:replace="item._id"/></st:attr>
+            <span st:replace="item.name"/>
+            </li>
+            </ol>
+            </div>,
+
+        env: {
+            items: [
+                { _id: 1, name: 'foo' },
+                { _id: 2, name: 'bar' }
+            ]
+        },
+
+        result:
+            <div xmlns:st={ns_st}>
+            <ol>
+            <li _id="1">foo</li>
+            <li _id="2">bar</li>
+            </ol>
+            </div>
     }
 ];
 
