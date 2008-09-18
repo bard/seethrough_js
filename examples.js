@@ -125,6 +125,22 @@ var examples = [
             <div xmlns:st={ns_st}>
             <span>I will be here</span>
             </div>
+    },
+
+    {
+        name: 'attribute',
+
+        template:
+            <div xmlns:st={ns_st}>
+            <div><st:attr name="foo">bar</st:attr></div>
+            </div>,
+
+        env: {},
+
+        result:
+            <div xmlns:st={ns_st}>
+            <div foo="bar"/>
+            </div>
     }
 ];
 
