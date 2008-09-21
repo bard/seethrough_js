@@ -32,7 +32,37 @@
 
 var ns_st = 'http://hyperstruct.net/seethrough#helma';
 
+XML.ignoreComments = false;
+
 var examples = [
+    {
+        name: 'handle comments',
+
+        template:
+            <head><!-- [if lt IE 8]>
+            <script type="text/javascript" src="/static/IE8.js"> </script>
+            <![endif]-->
+            </head>,
+
+        env: {},
+
+        result:
+            <head><!-- [if lt IE 8]>
+            <script type="text/javascript" src="/static/IE8.js"> </script>
+            <![endif]-->
+            </head>
+    },
+
+    {
+        name: 'preserve spaces',
+
+        template: <head><script> </script></head>,
+
+        env: {},
+
+        result: <head><script> </script></head>
+    },
+
     {
         name: 'empty children',
 
@@ -187,8 +217,9 @@ function verify() {
                                     '<' + tree1.name() + '>, ' + '<' + tree2.name() + '>)');
                 break;
             case 'text':
+            case 'comment':
                 if(tree1.valueOf() != tree2.valueOf())
-                    throw new Error('Different text values. (' +
+                    throw new Error('Different ' + tree1.nodeKind() + ' values. (' +
                                     '<' + tree1.valueOf() + '>, ' + '<' + tree2.valueOf() + '>)');
 
                 break;

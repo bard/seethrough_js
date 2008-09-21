@@ -212,11 +212,17 @@ seethrough.compile = function(xml) {
             return c.text(xml);
             break;
         case 'comment':
-            return seethrough.EMPTY();
+            return c.comment(xml);
             break;
         default:
             throw new Error('Compile error: unhandled node kind. (' + xml.nodeKind() + ')');
         }
+}
+
+seethrough.compile.comment = function(xmlComment) {
+    return function() {
+        return xmlComment;
+    }
 }
 
 seethrough.compile.text = function(xmlText) {
