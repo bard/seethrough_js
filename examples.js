@@ -36,44 +36,6 @@ XML.ignoreComments = false;
 
 var examples = [
     {
-        name: 'handle comments',
-
-        template:
-            <head><!-- [if lt IE 8]>
-            <script type="text/javascript" src="/static/IE8.js"> </script>
-            <![endif]-->
-            </head>,
-
-        env: {},
-
-        result:
-            <head><!-- [if lt IE 8]>
-            <script type="text/javascript" src="/static/IE8.js"> </script>
-            <![endif]-->
-            </head>
-    },
-
-    {
-        name: 'preserve spaces',
-
-        template: <head><script> </script></head>,
-
-        env: {},
-
-        result: <head><script> </script></head>
-    },
-
-    {
-        name: 'empty children',
-
-        template: <div xmlns:st={ns_st}><head/></div>,
-
-        env: {},
-
-        result: <div xmlns:st={ns_st}><head/></div>
-    },
-
-    {
         name: 'content',
 
         template: <div xmlns:st={ns_st} st:content='meta.title'/>,
@@ -173,6 +135,9 @@ var examples = [
             </div>
     },
 
+    // The next ones don't describe any new tag or attribute, they
+    // just check formerly buggy situations.
+
     {
         name: 'attribute on looping item',
 
@@ -200,6 +165,44 @@ var examples = [
             <li _id="2">bar</li>
             </ol>
             </div>
+    },
+
+    {
+        name: 'handle comments',
+
+        template:
+            <head><!-- [if lt IE 8]>
+            <script type="text/javascript" src="/static/IE8.js"> </script>
+            <![endif]-->
+            </head>,
+
+        env: {},
+
+        result:
+            <head><!-- [if lt IE 8]>
+            <script type="text/javascript" src="/static/IE8.js"> </script>
+            <![endif]-->
+            </head>
+    },
+
+    {
+        name: 'preserve spaces',
+
+        template: <head><script> </script></head>,
+
+        env: {},
+
+        result: <head><script> </script></head>
+    },
+
+    {
+        name: 'empty children',
+
+        template: <div xmlns:st={ns_st}><head/></div>,
+
+        env: {},
+
+        result: <div xmlns:st={ns_st}><head/></div>
     }
 ];
 
