@@ -342,8 +342,13 @@ function d(msg) {
             arguments.callee.printFn = function() {};
     }
 
-    var callerLine = (new Error()).stack.split('\n')[2];
+    var output;
+    var stack = (new Error()).stack;
+    if(stack)
+        output = stack.split('\n')[2] + ':' + msg;
+    else
+        output = msg;
 
-    arguments.callee.printFn(callerLine + ':' + msg);
+    arguments.callee.printFn(output);
 }
 d.on = false;
