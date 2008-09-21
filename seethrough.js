@@ -37,7 +37,7 @@ var seethrough = {};
 // ----------------------------------------------------------------------
 
 seethrough.processors = {
-    'http://hyperstruct.net/seethrough#helma::attr': function() {
+    'http://hyperstruct.net/seethrough#js::attr': function() {
         // Apparently, an xml attribute object cannot be created by
         // itself, so we use a dummy element as attribute "factory".
         // Also, we want to create this element just once, not every
@@ -49,7 +49,7 @@ seethrough.processors = {
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::condition': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::condition': function(attrValue) {
         return function stCondition(element, env, children) {
             if(seethrough.getEnv(env, attrValue))
                 return element.appendChild(children(env));
@@ -58,13 +58,13 @@ seethrough.processors = {
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::disable': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::disable': function(attrValue) {
         return function stDisable(element, env, children) {
             return attrValue == 'true' ? new XML('') : element;
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::replace': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::replace': function(attrValue) {
         return function stReplace(element, env, children) {
             var envValue = seethrough.getEnv(env, attrValue);
             switch(typeof(envValue)) { // this should belong in
@@ -81,7 +81,7 @@ seethrough.processors = {
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::inspect': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::inspect': function(attrValue) {
         return function stInspect(element, env, children) {
             var envValue = seethrough.getEnv(env, attrValue);
             var representation;
@@ -106,19 +106,19 @@ seethrough.processors = {
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::content': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::content': function(attrValue) {
         return function(element, env, children) {
             return element.appendChild(seethrough.getEnv(env, attrValue));
         }
     },
 
-//     'http://hyperstruct.net/seethrough#helma::extra': function(attrValue, children) {
+//     'http://hyperstruct.net/seethrough#js::extra': function(attrValue, children) {
 //         return function(element, env) {
 //             return element.appendChild(seethrough.getEnv(env, attrValue));
 //         }
 //     },
 
-    'http://hyperstruct.net/seethrough#helma::loop': function(attrValue) {
+    'http://hyperstruct.net/seethrough#js::loop': function(attrValue) {
         var [iterName, collectionName] = attrValue.split(' ');
         return function stLoop(element, env, children) {
             var container = new XMLList();
@@ -153,7 +153,7 @@ seethrough.processors = {
         }
     },
 
-    'http://hyperstruct.net/seethrough#helma::eval': function() {
+    'http://hyperstruct.net/seethrough#js::eval': function() {
         return function stEval(element, env, children) {
             return new XML(eval(children(env).toString()));
         }
@@ -275,7 +275,7 @@ seethrough.compile.element = function(xmlElement) {
                 var xmlOut = xmlBase.copy();
                 d('* Rendering ' + xmlOut.name());
 
-                xmlChildren = children(env);
+                xmlChildren = children(env); // undeclared?
                 if(typeof(xmlChildren) == 'undefined')
                     return xmlOut;
 

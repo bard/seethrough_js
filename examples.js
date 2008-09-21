@@ -30,7 +30,7 @@
  */
 
 
-var ns_st = 'http://hyperstruct.net/seethrough#helma';
+var ns_st = 'http://hyperstruct.net/seethrough#js';
 
 XML.ignoreComments = false;
 
