@@ -165,20 +165,15 @@ seethrough.processors = {
 // ----------------------------------------------------------------------
 
 seethrough.getEnv = function(env, path) {
-    var value;
     try {
-        value = path.split('.').reduce(function(subEnv, propName) subEnv[propName], env);
+        var value = path.split('.').reduce(function(subEnv, propName) subEnv[propName], env);
+        if(typeof(value) == 'xml' && value.nodeKind() == 'attribute')
+            return value.toString();
+        else
+            return value;
     } catch(e if e.name == 'TypeError') {
-        value = undefined;
+        return undefined;
     }
-
-    if(typeof(value) == 'function') {
-        // might be better to leave the choice of what to do to
-        // the requester. that will leave the burden too, though
-        return value(env);
-    }
-    else
-        return value;
 };
 
 
