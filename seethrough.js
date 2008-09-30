@@ -165,15 +165,9 @@ seethrough.processors = {
 // ----------------------------------------------------------------------
 
 seethrough.getEnv = function(env, path) {
-    var value = env;
-
-    if(path.match(/\)$/))
-        return getenv2(env, path);
-
+    var value;
     try {
-        for each(var step in path.split('.')) {
-            value = value[step];
-        }
+        value = path.split('.').reduce(function(subEnv, propName) subEnv[propName], env);
     } catch(e if e.name == 'TypeError') {
         value = undefined;
     }
