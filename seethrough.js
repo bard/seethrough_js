@@ -165,8 +165,17 @@ seethrough.processors = {
 // ----------------------------------------------------------------------
 
 seethrough.getEnv = function(env, path) {
+    function fold(fn, acc, seq) {
+        Array.forEach(seq, function(item) { acc = fn(acc, item); });
+        return acc;
+    }
+
     try {
-        var value = path.split('.').reduce(function(subEnv, propName) subEnv[propName], env);
+        var value = fold(
+            function(subEnv, propName) { return subEnv[propName] },
+            env,
+            path.split('.'));
+
         if(typeof(value) == 'xml' && value.nodeKind() == 'attribute')
             return value.toString();
         else
