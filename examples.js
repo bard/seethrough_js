@@ -253,7 +253,9 @@ function verify() {
 
         }
 
-        compareXML1(t1.normalize(), t2.normalize());
+        t1.normalize();
+        t2.normalize();
+        compareXML1(t1, t2);
         return true;
     }
 
