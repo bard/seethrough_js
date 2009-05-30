@@ -8,7 +8,7 @@
  * Free Software Foundation; either version 3 of the License, or (at your
  * option) any later version.
  *
- * SamePlace is distributed in the hope that it will be useful, but
+ * seethrough is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -19,11 +19,6 @@
  * The interactive user interfaces in modified source and object code
  * versions of this program must display Appropriate Legal Notices, as
  * required under Section 5 of the GNU General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU General Public License
- * version 3, modified versions must display the "Powered by SamePlace"
- * logo to users in a legible manner and the GPLv3 text must be made
- * available to them.
  *
  * Author: Massimiliano Mirra, <bard [at] hyperstruct [dot] net>
  *
