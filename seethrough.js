@@ -39,7 +39,8 @@ seethrough.processors = {
         // time we need to generate an attribute.
         var dummy = <dummy/>;
         return function stAttr(element, env, children) {
-            dummy.@[element.@name] = children(env).toString();
+            var value = children(env);
+            dummy.@[element.@name] = (typeof(value) === 'undefined') ? '' : value.toString();
             return dummy.@[element.@name];
         }
     },
