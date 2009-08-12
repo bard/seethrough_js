@@ -135,6 +135,22 @@ var examples = [
             </div>
     },
 
+    {
+        name: 'empty attribute',
+
+        template:
+            <div xmlns:st={ns_st}>
+            <div><st:attr name="foo"></st:attr></div>
+            </div>,
+
+        env: {},
+
+        result:
+            <div xmlns:st={ns_st}>
+            <div/>
+            </div>
+    },
+
     // The next ones don't describe any new tag or attribute, they
     // just check formerly buggy situations.
 

@@ -276,7 +276,8 @@ seethrough.compile.element = function(xmlElement) {
                 var xmlChild;
                 for(var i=0,l=xmlChildren.length(); i<l; i++) {
                     xmlChild = xmlChildren[i];
-                    if(xmlChild.nodeKind() == 'attribute')
+                    if(xmlChild.nodeKind() == 'attribute' &&
+                       xmlChild.toString() != '')
                         xmlOut.@[xmlChild.name()] = xmlChild.toString();
                     else
                         xmlOut.appendChild(xmlChild);
