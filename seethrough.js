@@ -354,3 +354,33 @@ function d(msg) {
     arguments.callee.printFn(output);
 }
 d.on = false;
+
+
+// ENVIRONMENT-SPECIFIC: HELMA
+// ----------------------------------------------------------------------
+
+if(typeof(export) === 'function') {
+
+    include('helma/file');
+    import('helma/webapp/response');
+
+    export('render', 'Response');
+
+    function render(templateName, env) {
+        // This should eventually be cached and only recompiled if
+        // file changes.
+
+        var template =
+            seethrough.compile(
+                new XML(
+                    new File(
+                        getResource(templateName + '.st'))
+                        .readAll())
+            );
+        return template(env);
+    }
+
+    function Response(template, env) {
+        return new helma.webapp.response.Response(render(template, env));
+    }
+}
